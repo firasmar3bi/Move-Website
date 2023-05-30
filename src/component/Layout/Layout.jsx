@@ -2,10 +2,21 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Navbar from '../Navbar/Navbar'
 import Footer from '../Footer/Footer'
-export default function Layout() {
+import { useNavigate } from "react-router-dom";
+
+
+export default function Layout({users,setUser}) {
+  
+  let Navigate = useNavigate();
+  
+  function logout(){
+    localStorage.removeItem('token');
+    setUser(null)
+    Navigate('/Login')
+  }
   return (
     <>
-      <Navbar />
+      <Navbar users={users} logout={logout}/>
       
         <Outlet></Outlet>
 
